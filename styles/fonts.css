@@ -1,0 +1,24 @@
+/* styles/fonts.css */
+@font-face {
+  font-family: 'Coneria Script';
+  src: url('/fonts/ConeriaScript.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geometos Soft';
+  src: url('/fonts/GeometosSoftRegular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bavex';
+  src: url('/fonts/Bavex.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

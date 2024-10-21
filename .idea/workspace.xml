@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="146e379d-c044-4abb-a508-09344638e1d4" name="Changes" comment="added functional">
+      <change afterPath="$PROJECT_DIR$/src/components/ui/loader_modal.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/ResponseHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/usecases/auth/GetProfileUseCase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/middleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_08_2024_08_43_a__m___Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_08_2024_08_43_a_ m__[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_08_2024_05_02_p__m___Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_08_2024_05_02_p_ m__[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_08_2024_05_40_p__m___Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_08_2024_05_40_p_ m__[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/auth/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/login/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/auth/sign-up/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/sign-up/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/my-account/cuenta.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/my-account/cuenta.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/ResponseHandler.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/infrastructure/AuthService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/infrastructure/AuthService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/repositories/AuthRepository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/repositories/AuthRepository.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/usecases/auth/RegisterUsecase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/usecases/auth/RegisterUserUseCase.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="false" />
+    <option name="myAllFileTypesSelected" value="true" />
+    <option name="mySelectedFileTypes">
+      <set />
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Navarrow0&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/mexmaster241/tarjetas-con-amor.git&quot;,
+    &quot;accountId&quot;: &quot;16368ca1-5884-4c14-91ad-eac98417055e&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2lGqcsbbIBIQ3TGV1cZKM6zWrvq" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Latitude/Downloads/Modernize-Nextjs-Free-main/Modernize-Nextjs-Free-main/package",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.dev.executor": "Debug",
+    "ts.external.directory.path": "C:\\Users\\Latitude\\Documents\\GitHub\\tarjetas-con-amor\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Latitude\Documents\GitHub\tarjetas-con-amor\public" />
+      <recent name="C:\Users\Latitude\Documents\GitHub\tarjetas-con-amor\public\fonts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Latitude\Documents\GitHub\tarjetas-con-amor\src" />
+      <recent name="C:\Users\Latitude\Documents\GitHub\tarjetas-con-amor" />
+      <recent name="C:\Users\Latitude\Documents\GitHub\tarjetas-con-amor\src\app\auth\sign-up" />
+      <recent name="C:\Users\Latitude\Documents\GitHub\tarjetas-con-amor\src\core" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.dev" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.18034.50" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="146e379d-c044-4abb-a508-09344638e1d4" name="Changes" comment="" />
+      <created>1724816842937</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1724816842937</updated>
+      <workItem from="1724816844108" duration="7922000" />
+      <workItem from="1724885378466" duration="36024000" />
+      <workItem from="1725002311852" duration="2992000" />
+      <workItem from="1725007117909" duration="13671000" />
+      <workItem from="1725052868164" duration="10767000" />
+      <workItem from="1725400259255" duration="717000" />
+      <workItem from="1725471471946" duration="105000" />
+      <workItem from="1725471598919" duration="359000" />
+      <workItem from="1725473578186" duration="2409000" />
+      <workItem from="1725507108936" duration="22882000" />
+      <workItem from="1726260944943" duration="6907000" />
+      <workItem from="1726584847605" duration="17136000" />
+    </task>
+    <task id="LOCAL-00001" summary="added signIn and singup&#10;componnet fixes">
+      <option name="closed" value="true" />
+      <created>1725030399719</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1725030399719</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fixes">
+      <option name="closed" value="true" />
+      <created>1725031531993</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1725031531993</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add sign up">
+      <option name="closed" value="true" />
+      <created>1725058013263</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1725058013263</updated>
+    </task>
+    <task id="LOCAL-00004" summary="added functional">
+      <option name="closed" value="true" />
+      <created>1725473658366</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1725473658366</updated>
+    </task>
+    <task id="LOCAL-00005" summary="added functional">
+      <option name="closed" value="true" />
+      <created>1725977783878</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1725977783880</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="added signIn and singup&#10;componnet fixes" />
+    <MESSAGE value="fixes" />
+    <MESSAGE value="add sign up" />
+    <MESSAGE value="added functional" />
+    <option name="LAST_COMMIT_MESSAGE" value="added functional" />
+  </component>
+</project>
