@@ -124,7 +124,7 @@ export default function CardsPage() {
       </div>
 
       {/* Desktop view */}
-      {/*VISTA PARA ESCRITORIO*/}
+      {/*VISTA PARA ESCRITORIO HACER RESPONSIVA LA PAGINA*/}
       <div className="hidden md:flex md:flex-wrap md:justify-center gap-6">
         {cardTemplates.filter((template) => template.categoria.includes(activeCategory)).map((template) => (
           <div 
