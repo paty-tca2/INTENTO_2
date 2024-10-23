@@ -35,7 +35,7 @@ export default function RootLayout({
           <main className="flex-grow">
             {children}
           </main>
-          <Footer />
+          {/* <Footer />  */}
         </NextAuthSessionProvider>
       </body>
     </html>

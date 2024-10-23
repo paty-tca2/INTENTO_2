@@ -43,6 +43,7 @@
     "react-toastify": "^10.0.5",
     "resend": "^4.0.0",
     "stripe": "^16.12.0",
+    "sweetalert2": "^11.14.4",
     "swiper": "^11.1.12",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7"

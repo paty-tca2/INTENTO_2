@@ -100,6 +100,7 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
   }
 
   const fontSizes = [12, 14, 16, 18, 20, 24, 28, 32, 36, 40, 48, 60];
+  const colores = ['#5D60A6', '#070A40', '#2D4BA6', '#737373', '#04D9B2'];
 
   //botones de menu 
   const renderEditorContent = () => (
@@ -112,14 +113,7 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
                 {renderElements()}
               </div>
             </div>
-            <button
-              className="w-24 h-24 p-2 bg-[#5D60a6] hover:bg-[#04D9b2] text-white font-geometos rounded-full flex flex-col items-center justify-center transition-colors duration-200"
-              onClick={addTextElement
-              }
-            >
-              <Type size={20} />
-              <span className="text-xs mt-1">Añadir Texto</span>
-            </button>
+
             <button
               className="w-24 h-24 p-2 bg-[#5D60a6] hover:bg-[#04D9b2] text-white font-geometos rounded-full flex flex-col items-center justify-center transition-colors duration-200"
               onClick={(renderElements) => setFontModalOpen(true)}
@@ -127,6 +121,26 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
               <Type size={20} />
               <span className="text-xs mt-1">Fuente</span>
             </button>
+
+            <button
+              className="w-24 h-24 p-2 bg-[#5D60a6] hover:bg-[#04D9b2] text-white font-geometos rounded-full flex flex-col items-center justify-center transition-colors duration-200"
+              onClick={() => setColorModalOpen(true)}
+            >
+              <Palette size={20} />
+              <span className="text-xs mt-1">Color</span>
+            </button>
+
+            <button
+              className="w-24 h-24 p-2 bg-[#5D60a6] hover:bg-[#04D9b2] text-white font-geometos rounded-full flex flex-col items-center justify-center transition-colors duration-200"
+              onClick={addImageElement}
+            >
+              <Image size={20} />
+              <span className="text-xs mt-1">Añadir Imagen</span>
+            </button>
+
+
+
+            {/*
             <button
               className="w-24 h-24 p-2 bg-[#5D60a6] hover:bg-[#04D9b2] text-white font-geometos rounded-full flex flex-col items-center justify-center transition-colors duration-200"
               onClick={() => setSizeModalOpen(true)}
@@ -136,11 +150,15 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
             </button>
             <button
               className="w-24 h-24 p-2 bg-[#5D60a6] hover:bg-[#04D9b2] text-white font-geometos rounded-full flex flex-col items-center justify-center transition-colors duration-200"
-              onClick={() => setColorModalOpen(true)}
+              onClick={addTextElement
+              }
             >
-              <Palette size={20} />
-              <span className="text-xs mt-1">Color</span>
+              <Type size={20} />
+              <span className="text-xs mt-1">Añadir Texto</span>
             </button>
+            
+            
+            
             <button
               className="w-24 h-24 p-2 bg-[#5D60a6] hover:bg-[#04D9b2] text-white font-geometos rounded-full flex flex-col items-center justify-center transition-colors duration-200"
               onClick={() => {
@@ -151,7 +169,7 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
             >
               <AlignCenter size={20} />
               <span className="text-xs mt-1">Alinear</span>
-            </button>
+            </button>*/}
           </div>
         )}
 
@@ -181,16 +199,7 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
   );
 
   //agregar cuadro de texto a las tarjetas 
-  //----------
 
-
-
-
-
-
-
-
-  
   const addTextElement = () => {
     const newTextElement: CanvasElement = {
       id: `text-${Date.now()}`,
@@ -207,43 +216,58 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
       placeholder: 'Nuevo texto'
     };
     setStaticElements([...staticElements, newTextElement]);
-    
+
 
   };
+  //----------------------
+  const addImageElement = () => {
+    const newImageElement: CanvasElement = {
+      id: `image-${Date.now()}`,
+      type: 'image',
+      content: '', // URL o base64 de la imagen
+      position: { x: 50, y: 50 },
+      width: 100,
+      height: 100,
+      isStatic: false,
+      placeholder: ''
+    };
+    setStaticElements([...staticElements, newImageElement]);
+  };
+
   const renderElements = () => {
     return staticElements.map((element) => {
       if (element.type === 'text') {
         return (
           <Draggable
-  key={element.id}
-  defaultPosition={{ x: element.position.x, y: element.position.y }}
-  grid={[25, 25]}
-  onStop={(e, data) => {
-    const updatedElements = staticElements.map((el) => {
-      if (el.id === element.id) {
-        return { ...el, position: { x: data.x, y: data.y } };
-      }
-      return el;
-    });
-    setStaticElements(updatedElements);
-  }}
->
-  <div
-    style={{
-      position: 'absolute',
-      fontFamily: element.font,
-      fontSize: element.size,
-      color: element.color,
-      textAlign: element.align,
-      width: element.width,
-      height: element.height,
-      cursor: 'move',
-      zIndex: 10 // Asegúrate de que el texto esté siempre delante
-    }}
-  >
-    {element.content}
-  </div>
-</Draggable>
+            key={element.id}
+            defaultPosition={{ x: element.position.x, y: element.position.y }}
+            grid={[25, 25]}
+            onStop={(e, data) => {
+              const updatedElements = staticElements.map((el) => {
+                if (el.id === element.id) {
+                  return { ...el, position: { x: data.x, y: data.y } };
+                }
+                return el;
+              });
+              setStaticElements(updatedElements);
+            }}
+          >
+            <div
+              style={{
+                position: 'absolute',
+                fontFamily: element.font,
+                fontSize: element.size,
+                color: element.color,
+                textAlign: element.align,
+                width: element.width,
+                height: element.height,
+                cursor: 'move',
+                zIndex: 10 // Asegúrate de que el texto esté siempre delante
+              }}
+            >
+              {element.content}
+            </div>
+          </Draggable>
         );
       }
       return null;
@@ -252,9 +276,11 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
   const getSvgPath = (pageNum: number) => {
     return `/templates/template-${template.id}/${pageNum}.svg`;
   };
+  /*
 
   const renderPageNavigation = () => (
     <div className="flex justify-center items-center space-x-4 mb-4">
+
       <button
         className="bg-gray-200 p-2 rounded-full"
         onClick={() => onPageChange(selectedPage > 1 ? selectedPage - 1 : 4)}
@@ -270,7 +296,7 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
       </button>
     </div>
   );
-
+*/
 
   const renderPageThumbnails = () => (
     <div className="flex justify-center space-x-4 mt-4">
@@ -299,7 +325,7 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
       {/* Main content */}
       <div className="flex flex-col items-center">
         {/* Page navigation for desktop */}
-        {!isMobile && renderPageNavigation()}
+        {!isMobile /*&& renderPageNavigation()*/}
 
         <div className="flex flex-col items-center w-full max-w-4xl">
           {/* Canvas area and options */}
@@ -380,8 +406,9 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
         </div>
       </div>
 
-      {/* Page navigation for mobile */}
-      {isMobile && renderPageNavigation()}
+      {/* Page navigation for mobile 
+      Rrendernavigation botonoes para mover de cara en el editor de plantilla */}
+      {isMobile /*&& renderPageNavigation()*/}
 
       {/* Font Modal */}
       <Modal isOpen={fontModalOpen} onClose={() => setFontModalOpen(false)} title="Seleccionar Fuente">
@@ -423,18 +450,23 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
           ))}
         </div>
       </Modal>
-
       {/* Color Modal */}
       <Modal isOpen={colorModalOpen} onClose={() => setColorModalOpen(false)} title="Seleccionar Color">
-        <SwatchesPicker
-          color={activeElement ? staticElements.find(el => el.id === activeElement)?.color : '#04D9B2'}
-          onChangeComplete={(color) => {
-            if (activeElement) {
-              updateElement(activeElement, { color: color.hex });
-            }
-            setColorModalOpen(false);
-          }}
-        />
+        <div className='grid grid-cols-3 gap-2'>
+          {colores.map((color) => (
+            <button
+              key={color}
+              className='w-12 h-12 rounded-full'
+              style={{ backgroundColor: color }}
+              onClick={() => {
+                if (activeElement) {
+                  updateElement(activeElement, { color });
+                }
+                setColorModalOpen(false);
+              }} />
+          ))}
+
+        </div>
       </Modal>
 
 
@@ -445,6 +477,32 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
 };
 
 export default Canvas;
+
+
+
+
+{/* Color Modal */ }
+
+{/*Libreria SwatchesPicker para poner todos la paleta de colores */ }
+{/*<Modal isOpen={colorModalOpen} onClose={() => setColorModalOpen(false)} title="Seleccionar Color">
+        <SwatchesPicker
+          color={activeElement ? staticElements.find(el => el.id === activeElement)?.color : '#04D9B2'}
+          onChangeComplete={(color) => {
+            if (activeElement) {
+              updateElement(activeElement, { color: color.hex });
+            }
+            setColorModalOpen(false);
+          }}
+        />
+      </Modal>*/}
+
+
+
+
+
+
+
+
 
 
 
@@ -462,7 +520,7 @@ import { Resizable } from 're-resizable';
 
 // Fuentes que proporciona el sistema 
 const fonts = [
-  'Bavex', 'Poppins', 'Lust Script', 'Melodrama', 'Now Cloud', 'Reselu', 'Stardom', 'Telma', 
+  'Bavex', 'Poppins', 'Lust Script', 'Melodrama', 'Now Cloud', 'Reselu', 'Stardom', 'Telma',
   'Blenny', 'Geometos Soft', 'Coneria Script', 'Helvetica Neue'
 ];
 
@@ -596,8 +654,8 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
             {renderEditorContent()}
           </div>
         )}
-        <div 
-          className="aspect-[3/4] rounded-lg overflow-hidden relative border-4 border-gray-300 ml-10" 
+        <div
+          className="aspect-[3/4] rounded-lg overflow-hidden relative border-4 border-gray-300 ml-10"
           style={{ width: '400px', height: '533px' }}
           onClick={() => setActiveElement(null)}
         >
