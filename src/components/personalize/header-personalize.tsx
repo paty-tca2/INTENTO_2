@@ -28,7 +28,7 @@ const PersonalizeHeader: React.FC<PersonalizeHeaderProps> = ({ onAddToBasket, te
 
   return (
     <>
-      <header className="bg-slate-50 p-2 fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-2 py-4 md:px-4 md:py-6 bg-white shadow-md">
+      <header className="bg-slate-50 p-2 fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-2 py-4 md:px-4 md:py-4 bg-white shadow-md">
         <div className="container mx-auto flex flex-row-reverse md:flex-row justify-between items-center">
           <button onClick={handleExit} className="text-red-700 hover:text-gray-800 order-2 md:order-1">
             Exit

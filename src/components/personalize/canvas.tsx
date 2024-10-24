@@ -104,7 +104,7 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
 
   //botones de menu 
   const renderEditorContent = () => (
-    <div className="bg-white rounded-lg p-4">
+    <div className=" flex bg-slate-300 rounded-lg p-4 w-28">
       <div className="flex flex-wrap justify-center gap-4">
         {activeElement && staticElements.find(el => el.id === activeElement)?.type === 'text' && (
           <div className="">
@@ -115,26 +115,26 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
             </div>
 
             <button
-              className="w-24 h-24 p-2 bg-[#5D60a6] hover:bg-[#04D9b2] text-white font-geometos rounded-full flex flex-col items-center justify-center transition-colors duration-200"
+              className="w-20 h-20 p-2  bg-gray-50 text-black font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
               onClick={(renderElements) => setFontModalOpen(true)}
             >
-              <Type size={20} />
+              <Type size={15} />
               <span className="text-xs mt-1">Fuente</span>
             </button>
-
+<br />
             <button
-              className="w-24 h-24 p-2 bg-[#5D60a6] hover:bg-[#04D9b2] text-white font-geometos rounded-full flex flex-col items-center justify-center transition-colors duration-200"
+              className="w-20 h-20 p-2 bg-gray-50 text-black font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
               onClick={() => setColorModalOpen(true)}
             >
-              <Palette size={20} />
+              <Palette size={15} />
               <span className="text-xs mt-1">Color</span>
             </button>
-
+<br />
             <button
-              className="w-24 h-24 p-2 bg-[#5D60a6] hover:bg-[#04D9b2] text-white font-geometos rounded-full flex flex-col items-center justify-center transition-colors duration-200"
+              className="w-20 h-20 p-2 bg-gray-50 text-black font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
               onClick={addImageElement}
             >
-              <Image size={20} />
+              <Image size={15} />
               <span className="text-xs mt-1">Añadir Imagen</span>
             </button>
 
@@ -299,25 +299,27 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
 */
 
   const renderPageThumbnails = () => (
-    <div className="flex justify-center space-x-4 mt-4">
-      {[1, 2, 3, 4].map((pageNum) => (
-        <button
-          key={pageNum}
-          onClick={() => onPageChange(pageNum)}
-          className={`relative w-16 h-24 border-2 ${selectedPage === pageNum ? 'border-blue-500' : 'border-gray-300'
-            } rounded overflow-hidden transition-all duration-200 hover:border-blue-300`}
-        >
-          <img
-            src={getSvgPath(pageNum)}
-            alt={`Page ${pageNum}`}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-xs py-1">
-            {pageNum}
-          </div>
-        </button>
-      ))}
-    </div>
+    <nav className='fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4 bg-cyan-700'>
+      <div className="flex justify-center space-x-4 overflow-x-auto">
+        {[1, 2, 3, 4].map((pageNum) => (
+          <button
+            key={pageNum}
+            onClick={() => onPageChange(pageNum)}
+            className={`relative w-16 h-24 border-2 ${selectedPage === pageNum ? 'border-blue-500' : 'border-gray-300'
+              } rounded overflow-hidden transition-all duration-200 hover:border-blue-300 `}
+          >
+            <img
+              src={getSvgPath(pageNum)}
+              alt={`Page ${pageNum}`}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-xs py-1">
+              {pageNum}
+            </div>
+          </button>
+        ))}
+      </div>
+    </nav>
   );
 
   return (
