@@ -5,13 +5,14 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { cardTemplates, CardTemplate } from '@/components/cards/card-templates';
-import { Heart, Eye } from 'lucide-react';
+import { Heart, Eye, Import } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import Header from "@/components/header";
 import './style.css';
 
 //opciones de tarjeta 
@@ -30,7 +31,7 @@ type CardSize = {
 
 //declaracion del objeto para seleccionar el tamaño de la carta
 const cardSizes: Record<CardOptions['type'], CardSize> = {
-  ecard: { label: 'eCard', description: 'Envio instantaneo', price: '$.20', bgColor: '#04d9b2' },
+  ecard: { label: 'eCard', description: 'Envio instantaneo', price: '$20', bgColor: '#04d9b2' },
   standard: { label: 'Standard ', description: 'Para tus seres queridos', price: '$199', bgColor: '#5D60a6' },
   mediana: { label: 'Mediana ', description: '57 x 81 cm', price: '$299', bgColor: '#5D60a6' },
   grande: { label: 'Grande ', description: '40 x 29.5 cm', price: '$399', bgColor: '#5D60a6' },
@@ -99,8 +100,10 @@ export default function CardsPage() {
   const [activeCategory, setActiveCategory] = useState(categories[0]);
 
   return (
+    
     //selccionamos una categoria de la tarjeta
     <div className="container mx-auto pt-48 px-4 py-8">
+      <Header/>
       <h1 className="text-5xl font-geometos text-[#5D60a6] mb-6 text-center">Selecciona tu memoria</h1>
       
       {/* MENU DE CATEGORIAS */}
@@ -125,7 +128,7 @@ export default function CardsPage() {
 
       {/* Desktop view */}
       {/*VISTA PARA ESCRITORIO HACER RESPONSIVA LA PAGINA*/}
-      <div className="hidden md:flex md:flex-wrap md:justify-center gap-6">
+      <div className=" flex hidden md:flex md:flex-wrap md:justify-center gap-6">
         {cardTemplates.filter((template) => template.categoria.includes(activeCategory)).map((template) => (
           <div 
             key={template.id} 

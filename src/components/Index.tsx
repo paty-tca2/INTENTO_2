@@ -31,11 +31,11 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} flex bg-white flex-col min-h-screen`}>
         <NextAuthSessionProvider>
-           
-          <main className="flex-grow">
+          <Header />
+          {/*<main className="flex-grow">
             {children}
           </main>
-         
+          {/* <Footer />  */}
         </NextAuthSessionProvider>
       </body>
     </html>

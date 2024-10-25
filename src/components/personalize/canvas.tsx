@@ -55,6 +55,7 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
   const [sizeModalOpen, setSizeModalOpen] = useState(false);
   const [colorModalOpen, setColorModalOpen] = useState(false);
   const [textoModalOpen, setextoModalOpen] = useState(false);
+  const [controlArray, setControlarray] = useState(0);
 
 
 
@@ -66,6 +67,9 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+
+  
 
   useEffect(() => {
     // Convert static placeholders to CanvasElements
@@ -104,9 +108,9 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
 
   //botones de menu 
   const renderEditorContent = () => (
-    <div className=" flex bg-slate-300 rounded-lg p-4 w-28">
-      <div className="flex flex-wrap justify-center gap-4">
-        {activeElement && staticElements.find(el => el.id === activeElement)?.type === 'text' && (
+    <div className=" flex bg-white rounded-md p-4 w-24">
+      <div className="flex flex-wrap justify-center ">
+        {/*{activeElement && staticElements.find(el => el.id === activeElement)?.type === 'text' && (*/}
           <div className="">
             <div>
               <div>
@@ -115,28 +119,29 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
             </div>
 
             <button
-              className="w-20 h-20 p-2  bg-gray-50 text-black font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
+              className="w-16 h-16 p-1  bg-gray-50 text-black border-rose-500 hover:bg-[#04d9b2]  font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
               onClick={(renderElements) => setFontModalOpen(true)}
             >
               <Type size={15} />
               <span className="text-xs mt-1">Fuente</span>
             </button>
-<br />
+            <br />
             <button
-              className="w-20 h-20 p-2 bg-gray-50 text-black font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
+              className="w-16 h-16 p-2 bg-gray-50 text-black font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
               onClick={() => setColorModalOpen(true)}
             >
               <Palette size={15} />
               <span className="text-xs mt-1">Color</span>
             </button>
-<br />
+            <br />
             <button
-              className="w-20 h-20 p-2 bg-gray-50 text-black font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
+              className="w-16 h-16 p-2 bg-gray-50 text-black font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
               onClick={addImageElement}
             >
               <Image size={15} />
               <span className="text-xs mt-1">Añadir Imagen</span>
             </button>
+            
 
 
 
@@ -171,7 +176,7 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
               <span className="text-xs mt-1">Alinear</span>
             </button>*/}
           </div>
-        )}
+        {/*)}*/}
 
         {activeElement && staticElements.find(el => el.id === activeElement)?.type === 'image' && (
           <div className="w-full space-y-2 flex flex-col items-center mt-4">
@@ -297,15 +302,15 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
     </div>
   );
 */
-
+  //menu de navegacion de la parte inferior de la pagina de editar de plantillas
   const renderPageThumbnails = () => (
-    <nav className='fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4 bg-cyan-700'>
+    <nav className=' fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4 bg-slate-700'>
       <div className="flex justify-center space-x-4 overflow-x-auto">
         {[1, 2, 3, 4].map((pageNum) => (
           <button
             key={pageNum}
             onClick={() => onPageChange(pageNum)}
-            className={`relative w-16 h-24 border-2 ${selectedPage === pageNum ? 'border-blue-500' : 'border-gray-300'
+            className={` flex relative w-16 h-24 border-2 ${selectedPage === pageNum ? 'border-blue-500' : 'border-gray-300'
               } rounded overflow-hidden transition-all duration-200 hover:border-blue-300 `}
           >
             <img
@@ -321,27 +326,29 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
       </div>
     </nav>
   );
+ 
 
   return (
-    <div className="w-full">
+    <div className=" flex w-full flex items-center grid gap-2">
       {/* Main content */}
       <div className="flex flex-col items-center">
         {/* Page navigation for desktop */}
         {!isMobile /*&& renderPageNavigation()*/}
 
-        <div className="flex flex-col items-center w-full max-w-4xl">
+        <div className="flex flex-col  justify-center w-full max-w-4xl ">
           {/* Canvas area and options */}
-          <div className="flex flex-col md:flex-row items-start justify-start w-full">
+          <div className="flex flex-col md:flex-row items-start  ">
             {/* Canvas options */}
             {!isMobile && (
-              <div className="w-48 mb-4 md:mb-0 md:mr-4">
+              <div className="w-20 md:mb-0 md:mr-4">
                 {renderEditorContent()}
               </div>
             )}
 
             {/* Canvas */}
             <div
-              className="aspect-[3/4] rounded-lg overflow-hidden relative border-4 border-gray-300 ml-10"
+              //marco del editor de plantilla
+              className="aspect-[3/4] rounded-lg overflow-hidden relative border-4 ml-10"
               style={{ width: '400px', height: '533px' }}
               onClick={() => setActiveElement(null)}
             >
@@ -352,129 +359,133 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
               >
                 Your browser does not support SVG
               </object>
-              <div className="absolute inset-0">
-                {staticElements.map((element) => (
-                  <div
-                    key={element.id}
-                    style={{
-                      position: 'absolute',
-                      left: `${element.position.x}px`,
-                      top: `${element.position.y}px`,
-                      width: `${element.width}px`,
-                      height: `${element.height}px`,
-                    }}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setActiveElement(element.id);
-                    }}
-                  >
-                    {element.type === 'image' ? (
-                      element.content ? (
-                        <img src={element.content} alt="Uploaded" className="w-full h-full object-cover" />
+              {/*Contenedor donde esta la imagen de la tarjeta */}
+              <div className="absolute inset-0 overflow-hidden">
+                <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${controlArray * 100}%)` }}>
+
+                  {staticElements.map((element) => (//arreglo de las imagenes 
+                    <div
+                      key={element.id}//se genera un conetendo para cada imagen 
+                      className='w-full flex-shrink-0'
+                      style={{
+                        position: 'relative',// la imagen se posiciona dentro del contenedor 
+                        left: `${element.position.x}px`,
+                        top: `${element.position.y}px`,
+                        width: `${element.width}px`,
+                        height: `${element.height}px`,
+                      }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveElement(element.id);
+                      }}
+                    >
+                      {element.type === 'image' ? (
+                        element.content ? (
+                          <img src={element.content} alt="Uploaded" className="w-full h-full object-cover" />
+                        ) : (
+                          <div className="w-full h-full bg-yellow-200 flex items-center justify-center">
+                            <Image size={24} />
+                          </div>
+                        )
                       ) : (
-                        <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                          <Image size={24} />
+                        <div
+                          contentEditable
+                          suppressContentEditableWarning
+                          className="w-full h-full p-2"
+                          style={{
+                            fontFamily: element.font || 'Lust Script, Arial, sans-serif',
+                            fontSize: `${element.size || 18}px`,
+                            color: element.color || '#04D9B2',
+                            textAlign: element.align || 'left',
+                          }}
+                          onBlur={(e) => {//Cuando el usuario deja de editar (evento onBlur), se actualiza el contenido del elemento con el nuevo texto que el usuario ha escrito (updateElement(element.id, { content: e.currentTarget.textContent || '' })).
+                            updateElement(element.id, { content: e.currentTarget.textContent || '' });
+                          }}
+                        >
+                          {element.content || element.placeholder}
                         </div>
-                      )
-                    ) : (
-                      <div
-                        contentEditable
-                        suppressContentEditableWarning
-                        className="w-full h-full p-2"
-                        style={{
-                          fontFamily: element.font || 'Lust Script, Arial, sans-serif',
-                          fontSize: `${element.size || 18}px`,
-                          color: element.color || '#04D9B2',
-                          textAlign: element.align || 'left',
-                        }}
-                        onBlur={(e) => {
-                          updateElement(element.id, { content: e.currentTarget.textContent || '' });
-                        }}
-                      >
-                        {element.content || element.placeholder}
-                      </div>
-                    )}
-                    {activeElement === element.id && (
-                      <div className="absolute inset-0 ring-2 ring-blue-500" />
-                    )}
-                  </div>
-                ))}
+                      )}
+                      {activeElement === element.id && (
+                        <div className="absolute inset-0 ring-2 ring-blue-500" />
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Page thumbnails */}
-          {!isMobile && renderPageThumbnails()}
+            {/* Page thumbnails */}
+            {!isMobile && renderPageThumbnails()}
+          </div>
         </div>
+
+        {/* Page navigation for mobile 
+      Rrendernavigation botonoes para mover de cara en el editor de plantilla */}
+        {isMobile /*&& renderPageNavigation()*/}
+
+        {/* Font Modal */}
+        <Modal isOpen={fontModalOpen} onClose={() => setFontModalOpen(false)} title="Seleccionar Fuente">
+          <div className="grid grid-cols-2 gap-2">
+            {fonts.map((font) => (
+              <button
+                key={font}
+                className="p-2 bg-[#5D60a6] hover:bg-[#04D9B2] rounded text-sm"
+                style={{ fontFamily: font }}
+                onClick={() => {
+                 /* if (activeElement) {
+                    updateElement(activeElement, { font });
+                  }
+                  setFontModalOpen(false);*/
+                }}
+              >
+                {font}
+              </button>
+            ))}
+          </div>
+        </Modal>
+
+        {/* Size Modal */}
+        <Modal isOpen={sizeModalOpen} onClose={() => setSizeModalOpen(false)} title="Seleccionar Tamaño de Fuente">
+          <div className="grid grid-cols-3 gap-2">
+            {fontSizes.map((size) => (
+              <button
+                key={size}
+                className="p-2 bg-[#5D60a6] hover:bg-[#04D9B2] rounded text-sm"
+                onClick={() => {
+                 /* if (activeElement) {
+                    updateElement(activeElement, { size });
+                  }
+                  setSizeModalOpen(false);*/
+                }}
+              >
+                {size}px
+              </button>
+            ))}
+          </div>
+        </Modal>
+        {/* Color Modal */}
+        <Modal isOpen={colorModalOpen} onClose={() => setColorModalOpen(false)} title="Seleccionar Color">
+          <div className='grid grid-cols-3 gap-2'>
+            {colores.map((color) => (
+              <button
+                key={color}
+                className='w-12 h-12 rounded-full'
+                style={{ backgroundColor: color }}
+                onClick={() => {
+                 /* if (activeElement) {
+                    updateElement(activeElement, { color });
+                  }
+                  setColorModalOpen(false);*/
+                }} />
+            ))}
+
+          </div>
+        </Modal>
+
+
       </div>
 
-      {/* Page navigation for mobile 
-      Rrendernavigation botonoes para mover de cara en el editor de plantilla */}
-      {isMobile /*&& renderPageNavigation()*/}
-
-      {/* Font Modal */}
-      <Modal isOpen={fontModalOpen} onClose={() => setFontModalOpen(false)} title="Seleccionar Fuente">
-        <div className="grid grid-cols-2 gap-2">
-          {fonts.map((font) => (
-            <button
-              key={font}
-              className="p-2 bg-[#5D60a6] hover:bg-[#04D9B2] rounded text-sm"
-              style={{ fontFamily: font }}
-              onClick={() => {
-                if (activeElement) {
-                  updateElement(activeElement, { font });
-                }
-                setFontModalOpen(false);
-              }}
-            >
-              {font}
-            </button>
-          ))}
-        </div>
-      </Modal>
-
-      {/* Size Modal */}
-      <Modal isOpen={sizeModalOpen} onClose={() => setSizeModalOpen(false)} title="Seleccionar Tamaño de Fuente">
-        <div className="grid grid-cols-3 gap-2">
-          {fontSizes.map((size) => (
-            <button
-              key={size}
-              className="p-2 bg-[#5D60a6] hover:bg-[#04D9B2] rounded text-sm"
-              onClick={() => {
-                if (activeElement) {
-                  updateElement(activeElement, { size });
-                }
-                setSizeModalOpen(false);
-              }}
-            >
-              {size}px
-            </button>
-          ))}
-        </div>
-      </Modal>
-      {/* Color Modal */}
-      <Modal isOpen={colorModalOpen} onClose={() => setColorModalOpen(false)} title="Seleccionar Color">
-        <div className='grid grid-cols-3 gap-2'>
-          {colores.map((color) => (
-            <button
-              key={color}
-              className='w-12 h-12 rounded-full'
-              style={{ backgroundColor: color }}
-              onClick={() => {
-                if (activeElement) {
-                  updateElement(activeElement, { color });
-                }
-                setColorModalOpen(false);
-              }} />
-          ))}
-
-        </div>
-      </Modal>
-
-
     </div>
-
-
   );
 };
 
@@ -496,7 +507,7 @@ export default Canvas;
             setColorModalOpen(false);
           }}
         />
-      </Modal>*/}
+        </Modal>*/}
 
 
 

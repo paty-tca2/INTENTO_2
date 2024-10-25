@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { toast } from "react-toastify";
 import axios from 'axios';
+import Header from "@/components/header";
 
 interface Order {
   id: number;
@@ -49,6 +50,7 @@ const Pedidos: React.FC = () => {
 
   return (
     <div className="pedidos-container text-black">
+      <Header/>
       <h2 className="text-center text-3xl font-geometos text-[#5D60a6] mb-4">Sus Pedidos</h2>
       {orders.length > 0 ? (
         <ul className="order-list">

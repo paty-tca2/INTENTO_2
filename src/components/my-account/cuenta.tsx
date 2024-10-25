@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from 'next/navigation';
 import { useSession } from "next-auth/react";
 import UpdateModal from './updateModal';
+import Header from "@/components/header";
 
 interface UserInfo {
   firstName: string;
@@ -101,7 +102,9 @@ const MiCuenta: React.FC = () => {
   };
 
   return (
+
       <div className="mi-cuenta-container text-black">
+        <Header/>
         <h2 className="text-center text-3xl font-geometos text-[#5D60a6] mb-4">Mi Cuenta</h2>
 
         {loading ? (

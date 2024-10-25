@@ -44,22 +44,22 @@ export default function PersonalizePage() {
   }
 //ncabezado para la página de personalización que probablemente incluya opciones para agregar la tarjeta al carrito.
   return (
-    <div className="container mx-auto pt-48 px-4 py-8">
-      
-      <PersonalizeHeader 
-        onAddToBasket={handleAddToBasket} 
-        template={template}
-      />
-      
-      <div className="flex flex-col md:flex-row gap-6">
-        {template && (
-          <Canvas 
-            template={template} 
-            selectedPage={selectedPage}
-            onPageChange={setSelectedPage}
-          />
-        )}
-      </div>
+    <div className="bg-slate-100 h-screen w-screen container mx-auto pt-24 px-4 py-8 ">
+    <PersonalizeHeader 
+      onAddToBasket={handleAddToBasket} 
+      template={template}
+    />
+    {/*Div donde está ubicado la tarjeta junto con el editor de plantilla*/}
+    <div className="bg-slate-100 relative w-full h-full overflow-hidden">
+      {template && (
+        <Canvas 
+          template={template} 
+          selectedPage={selectedPage}
+          onPageChange={setSelectedPage}
+        />
+      )}
     </div>
+  </div>
+  
   );
 }

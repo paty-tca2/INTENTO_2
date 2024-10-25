@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { CardTemplate } from '@/components/cards/card-templates';
 import { useSession } from 'next-auth/react';
 import { loadStripe } from '@stripe/stripe-js';
-
+import Header from "@/components/header";
 type CardOptions = {
   type: 'ecard' | 'standard' | 'mediana' | 'grande';
   quantity: number;
@@ -249,6 +249,7 @@ const CartPage = () => {
   if (!session) {
     return (
       <div className="container mx-auto pt-48 px-4 py-8 text-center">
+        <Header/>
         <h1 className="text-5xl font-geometos text-[#5D60a6] mb-6">Inicia sesión para ver tu carrito</h1>
         <p className="text-xl font-geometos text-gray-600 mb-8">Por favor, inicia sesión para acceder a tu carrito de compras.</p>
         <button
@@ -264,6 +265,7 @@ const CartPage = () => {
   if (isLoading) {
     return (
       <div className="container mx-auto pt-48 px-4 py-8 text-center">
+        <Header/>
         <h1 className="text-5xl font-geometos text-[#5D60a6] mb-6">Cargando carrito...</h1>
       </div>
     );
@@ -288,6 +290,7 @@ const CartPage = () => {
 
   return (
     <div className="container mx-auto pt-48 px-4 py-8">
+      <Header/>
       <h1 className="text-5xl font-geometos text-[#5D60a6] mb-6 text-center">Carrito</h1>
       
       <div className="grid md:grid-cols-2 gap-8">

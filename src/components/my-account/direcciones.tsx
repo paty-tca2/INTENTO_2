@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useRouter } from 'next/navigation';
 import { FaTrash } from 'react-icons/fa'; // Make sure to install react-icons if you haven't already
+import Header from "@/components/header";
 
 interface Address {
   id: number;
@@ -122,6 +123,7 @@ const DireccionesEnvio: React.FC = () => {
 
   return (
     <div className="direcciones-envio-container text-black">
+      <Header/>
       <h2 className="text-center text-3xl font-geometos text-[#5D60a6] mb-4">Direcciones de Envio</h2>
       
       {/* Display existing addresses */}

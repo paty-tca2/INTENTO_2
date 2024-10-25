@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useRouter } from 'next/navigation';
 import { useSession } from "next-auth/react";
 import { FaTrash } from 'react-icons/fa';
+import Header from "@/components/header";
 
 interface Reminder {
   id: number;
@@ -136,6 +137,7 @@ const Recordatorios: React.FC = () => {
 
   return (
     <div className="recordatorios-container font-geometos text-[#5D60a6]">
+      <Header/>
       <h2 className="text-center text-3xl font-geometos text-[#5D60a6] mb-4">Recordatorios</h2>
       
       <div className="flex flex-col md:flex-row gap-6 justify-center">
