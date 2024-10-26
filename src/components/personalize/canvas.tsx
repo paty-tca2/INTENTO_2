@@ -46,6 +46,13 @@ interface CanvasElement {
   height: number;
   isStatic?: boolean;
 }
+const PageAlert = () => {
+  const [showAlert, setShowAlert] = useState(false); // Inicialmente oculta
+
+  useEffect(() => {
+    // Mostrar la alerta cuando la página se cargue
+    setShowAlert(true);
+  }, [])}; // Se ejecuta solo una vez al cargar la página
 
 const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange }) => {
   const [staticElements, setStaticElements] = useState<CanvasElement[]>([]);
@@ -69,7 +76,7 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
   }, []);
 
 
-  
+
 
   useEffect(() => {
     // Convert static placeholders to CanvasElements
@@ -111,61 +118,81 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
     <div className=" flex bg-white rounded-md p-4 w-24">
       <div className="flex flex-wrap justify-center ">
         {/*{activeElement && staticElements.find(el => el.id === activeElement)?.type === 'text' && (*/}
-          <div className="">
+        <div className="">
+          <div>
             <div>
-              <div>
-                {renderElements()}
-              </div>
+              {renderElements()}
             </div>
+          </div>
 
-            <button
-              className="w-16 h-16 p-1  bg-gray-50 text-black border-rose-500 hover:bg-[#04d9b2]  font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
-              onClick={(renderElements) => setFontModalOpen(true)}
-            >
-              <Type size={15} />
-              <span className="text-xs mt-1">Fuente</span>
-            </button>
-            <br />
+          <button
+            className="w-16 h-16 p-1  bg-gray-50 text-black border-black hover:bg-[#04d9b2]  font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
+            onClick={(renderElements) => setFontModalOpen(true)}
+          >
+            <Type size={15} />
+            <span className="text-xs mt-1">Fuente</span>
+          </button>
+          <br />
+          <button
+            className="w-16 h-16 p-2 bg-gray-50 text-black font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
+            onClick={() => setColorModalOpen(true)}
+          >
+            <Palette size={15} />
+            <span className="text-xs mt-1">Color</span>
+          </button>
+          <br />
+          {/*
             <button
               className="w-16 h-16 p-2 bg-gray-50 text-black font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
-              onClick={() => setColorModalOpen(true)}
-            >
-              <Palette size={15} />
-              <span className="text-xs mt-1">Color</span>
-            </button>
-            <br />
-            <button
-              className="w-16 h-16 p-2 bg-gray-50 text-black font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
-              onClick={addImageElement}
+              onClick={handleImageUpload}
             >
               <Image size={15} />
               <span className="text-xs mt-1">Añadir Imagen</span>
             </button>
-            
+             */}
+          <button
+            className="w-16 h-16 p-2 bg-gray-50 text-black font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
+            onClick={triggerFileInput}
+          >
+            <Image size={15} />
+            <span className="text-xs mt-1">Añadir Imagen</span>
+          </button>
+
+          {/* Input de tipo file oculto */}
+          <input
+            type="file"
+            accept="image/*"
+            ref={fileInputRef}
+            className="hidden"
+            onChange={handleImageUpload}
+          />
+
+          <br />
 
 
 
-            {/*
+          <button
+            className="w-16 h-16 p-2 bg-gray-50 text-black font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
+            onClick={() => setSizeModalOpen(true)}
+          >
+            <VscTextSize size={20} />
+            <span className="text-xs mt-1">Tamaño</span>
+          </button>
+          <br />
+
+          <button
+            className="w-16 h-16 p-2 bg-gray-50 text-black font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
+            onClick={addTextElement
+            }
+          >
+            <Type size={20} />
+            <span className="text-xs mt-1">Añadir Texto</span>
+          </button>
+
+          <br />
+          {/*
             <button
-              className="w-24 h-24 p-2 bg-[#5D60a6] hover:bg-[#04D9b2] text-white font-geometos rounded-full flex flex-col items-center justify-center transition-colors duration-200"
-              onClick={() => setSizeModalOpen(true)}
-            >
-              <VscTextSize size={20} />
-              <span className="text-xs mt-1">Tamaño</span>
-            </button>
-            <button
-              className="w-24 h-24 p-2 bg-[#5D60a6] hover:bg-[#04D9b2] text-white font-geometos rounded-full flex flex-col items-center justify-center transition-colors duration-200"
-              onClick={addTextElement
-              }
-            >
-              <Type size={20} />
-              <span className="text-xs mt-1">Añadir Texto</span>
-            </button>
-            
-            
-            
-            <button
-              className="w-24 h-24 p-2 bg-[#5D60a6] hover:bg-[#04D9b2] text-white font-geometos rounded-full flex flex-col items-center justify-center transition-colors duration-200"
+              className="w-16 h-16 p-2 bg-gray-50 text-black font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
               onClick={() => {
                 const currentAlign = staticElements.find(el => el.id === activeElement)?.align || 'left';
                 const nextAlign = currentAlign === 'left' ? 'center' : currentAlign === 'center' ? 'right' : 'left';
@@ -174,32 +201,52 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
             >
               <AlignCenter size={20} />
               <span className="text-xs mt-1">Alinear</span>
-            </button>*/}
-          </div>
-        {/*)}*/}
+            </button> */}
+        </div>
+        {/**/}
 
         {activeElement && staticElements.find(el => el.id === activeElement)?.type === 'image' && (
-          <div className="w-full space-y-2 flex flex-col items-center mt-4">
-            <label className="w-24 h-24 p-2 bg-[#5D60a6] hover:bg-[#04D9b2] text-white font-geometos rounded-full flex flex-col items-center justify-center transition-colors duration-200 cursor-pointer">
-              <input
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={(e) => {
-                  const file = e.target.files?.[0];
-                  if (file) {
-                    const reader = new FileReader();
-                    reader.onload = (event) => updateElement(activeElement, { content: event.target?.result as string });
-                    reader.readAsDataURL(file);
-                  }
-                }}
-              />
-              <Image size={20} />
-              <span className="text-xs mt-1">Subir Imagen</span>
-            </label>
+          <div>
+          <label className="w-24 h-24 p-2 bg-[#5D60a6] hover:bg-[#04D9b2] text-white font-geometos rounded-full flex flex-col items-center justify-center cursor-pointer">
+            <input 
+              type="file" 
+              accept="image/*" 
+              className="hidden" 
+              onChange={handleImageUpload} 
+            />
+            <Image size={20} />
+            <span className="text-xs mt-1">Subir Imagen</span>
+          </label>
+        
+          <div className="canvas">
+            {staticElements.map((el) =>
+              el.type === 'image' ? (
+                <div
+                  key={el.id}
+                  className="draggable"
+                  style={{
+                    position: 'absolute',
+                    top: el.position.y,
+                    left: el.position.x,
+                    width: el.width,
+                    height: el.height,
+                    backgroundImage: `url(${el.content})`,
+                    backgroundSize: 'cover',
+                    cursor: 'move',
+                  }}
+                  draggable
+                  onDragStart={(e) => handleDragStart(e, el.id)}
+                  onDrag={(e) => handleDrag(e, el.id)}
+                />
+              ) : null
+            )}
           </div>
+        </div>
+        
+          
         )}
       </div>
+      
     </div>
   );
 
@@ -224,7 +271,58 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
 
 
   };
-  //----------------------
+
+  const addImageElement = (imageSrc: string) => {
+    const newImageElement: CanvasElement = {
+      id: `image-${Date.now()}`,
+      type: 'image',
+      content: imageSrc,
+      position: { x:0, y: 0 }, // Posición inicial
+      width: 100,
+      height: 100,
+      isStatic: false,
+      placeholder: ''
+    };
+    setStaticElements((prevElements) => [...prevElements, newImageElement]);
+  };
+
+  const fileInputRef = React.useRef<HTMLInputElement | null>(null);
+
+  const triggerFileInput = () => {
+    fileInputRef.current?.click(); // Simula clic en el input
+  };
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const imageSrc = event.target?.result as string;
+        addImageElement(imageSrc); // Agrega la imagen al lienzo
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleDragStart = (e: React.DragEvent, id: string) => {
+    e.dataTransfer.setData('elementId', id);
+  };
+  
+  const handleDrag = (e: React.DragEvent, id: string) => {
+    const updatedElements = staticElements.map((el) =>
+      el.id === id
+        ? { ...el, position: { x: e.clientX, y: e.clientY } }
+        : el
+    );
+    setStaticElements(updatedElements);
+  };
+
+
+
+
+
+
+  /*----------------------
   const addImageElement = () => {
     const newImageElement: CanvasElement = {
       id: `image-${Date.now()}`,
@@ -238,7 +336,7 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
     };
     setStaticElements([...staticElements, newImageElement]);
   };
-
+*/
   const renderElements = () => {
     return staticElements.map((element) => {
       if (element.type === 'text') {
@@ -281,7 +379,6 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
   const getSvgPath = (pageNum: number) => {
     return `/templates/template-${template.id}/${pageNum}.svg`;
   };
-  /*
 
   const renderPageNavigation = () => (
     <div className="flex justify-center items-center space-x-4 mb-4">
@@ -301,7 +398,7 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
       </button>
     </div>
   );
-*/
+
   //menu de navegacion de la parte inferior de la pagina de editar de plantillas
   const renderPageThumbnails = () => (
     <nav className=' fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4 bg-slate-700'>
@@ -326,7 +423,7 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
       </div>
     </nav>
   );
- 
+
 
   return (
     <div className=" flex w-full flex items-center grid gap-2">
@@ -432,10 +529,10 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
                 className="p-2 bg-[#5D60a6] hover:bg-[#04D9B2] rounded text-sm"
                 style={{ fontFamily: font }}
                 onClick={() => {
-                 /* if (activeElement) {
+                  if (activeElement) {
                     updateElement(activeElement, { font });
                   }
-                  setFontModalOpen(false);*/
+                  setFontModalOpen(false);
                 }}
               >
                 {font}
@@ -452,10 +549,10 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
                 key={size}
                 className="p-2 bg-[#5D60a6] hover:bg-[#04D9B2] rounded text-sm"
                 onClick={() => {
-                 /* if (activeElement) {
+                  if (activeElement) {
                     updateElement(activeElement, { size });
                   }
-                  setSizeModalOpen(false);*/
+                  setSizeModalOpen(false);
                 }}
               >
                 {size}px
@@ -472,10 +569,10 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
                 className='w-12 h-12 rounded-full'
                 style={{ backgroundColor: color }}
                 onClick={() => {
-                 /* if (activeElement) {
+                  if (activeElement) {
                     updateElement(activeElement, { color });
                   }
-                  setColorModalOpen(false);*/
+                  setColorModalOpen(false);
                 }} />
             ))}
 
@@ -520,218 +617,3 @@ export default Canvas;
 
 
 
-{/* 
-import React, { useState, useRef, useEffect } from 'react';
-import { CardTemplate } from '@/components/cards/card-templates';
-import { ChevronLeft, ChevronRight, Type, Image, X, Trash2, AlignLeft, AlignCenter, AlignRight, Palette, Maximize } from 'lucide-react';
-import { FileUpload } from './file-upload';
-import Draggable from 'react-draggable';
-import Modal from './modal';
-import { VscTextSize } from 'react-icons/vsc';
-import { SwatchesPicker } from 'react-color';
-import { Resizable } from 're-resizable';
-
-// Fuentes que proporciona el sistema 
-const fonts = [
-  'Bavex', 'Poppins', 'Lust Script', 'Melodrama', 'Now Cloud', 'Reselu', 'Stardom', 'Telma',
-  'Blenny', 'Geometos Soft', 'Coneria Script', 'Helvetica Neue'
-];
-
-interface CanvasProps {
-  template: CardTemplate;
-  selectedPage: number;
-  onPageChange: (page: number) => void;
-}
-
-interface CanvasElement {
-  placeholder: string;
-  id: string;
-  type: 'text' | 'image';
-  content: string;
-  position: { x: number; y: number };
-  font?: string;
-  size?: number;
-  color?: string;
-  align?: 'left' | 'center' | 'right';
-  width: number;
-  height: number;
-  isStatic?: boolean;
-}
-
-const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange }) => {
-  const [staticElements, setStaticElements] = useState<CanvasElement[]>([]);
-  const [activeElement, setActiveElement] = useState<string | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const [fontModalOpen, setFontModalOpen] = useState(false);
-  const [sizeModalOpen, setSizeModalOpen] = useState(false);
-  const [colorModalOpen, setColorModalOpen] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  useEffect(() => {
-    const currentPagePlaceholders = template.pages.find(p => p.pageNumber === selectedPage)?.staticPlaceholders || [];
-    const staticCanvasElements = currentPagePlaceholders.map(placeholder => ({
-      id: placeholder.id,
-      type: placeholder.type,
-      content: placeholder.content || placeholder.placeholder || '',
-      position: placeholder.position,
-      font: placeholder.font || 'Lust Script',
-      size: placeholder.type === 'text' ? 16 : undefined,
-      color: placeholder.color || '#04D9B2',
-      align: 'left',
-      width: placeholder.size.width,
-      height: placeholder.size.height,
-      isStatic: true,
-      placeholder: placeholder.placeholder || ''
-    }));
-    setStaticElements(staticCanvasElements as CanvasElement[]);
-  }, [template, selectedPage]);
-
-  const updateElement = (id: string, updates: Partial<CanvasElement>) => {
-    setStaticElements(staticElements.map(el => el.id === id ? { ...el, ...updates } : el));
-  };
-
-  const addTextElement = () => {
-    const newTextElement: CanvasElement = {
-      id: `text-${Date.now()}`,
-      type: 'text',
-      content: 'Nuevo texto',
-      position: { x: 50, y: 50 },
-      font: 'Poppins',
-      size: 16,
-      color: '#000000',
-      align: 'left',
-      width: 100,
-      height: 50,
-      isStatic: false,
-      placeholder: 'Nuevo texto'
-    };
-    setStaticElements([...staticElements, newTextElement]);
-  };
-
-  const addImageElement = () => {
-    const newImageElement: CanvasElement = {
-      id: `image-${Date.now()}`,
-      type: 'image',
-      content: '', // URL o base64 de la imagen
-      position: { x: 50, y: 50 },
-      width: 100,
-      height: 100,
-      isStatic: false,
-      placeholder: ''
-    };
-    setStaticElements([...staticElements, newImageElement]);
-  };
-
-  const renderEditorContent = () => (
-    <div className="bg-white rounded-lg p-4">
-      <div className="flex flex-wrap justify-center gap-4">
-        {activeElement && staticElements.find(el => el.id === activeElement)?.type === 'text' && (
-          <div className="w-full space-y-2 flex flex-col items-center mt-4">
-            <button
-              className="w-24 h-24 p-2 bg-[#5D60a6] hover:bg-[#04D9b2] text-white font-geometos rounded-full flex flex-col items-center justify-center transition-colors duration-200"
-              onClick={addTextElement}
-            >
-              <Type size={20} />
-              <span className="text-xs mt-1">Añadir Texto</span>
-            </button>
-            <button
-              className="w-24 h-24 p-2 bg-[#5D60a6] hover:bg-[#04D9b2] text-white font-geometos rounded-full flex flex-col items-center justify-center transition-colors duration-200"
-              onClick={addImageElement}
-            >
-              <Image size={20} />
-              <span className="text-xs mt-1">Añadir Imagen</span>
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-
-  const getSvgPath = (pageNum: number) => {
-    return `/templates/template-${template.id}/${pageNum}.svg`;
-  };
-
-  return (
-    <div className="w-full">
-      <div className="flex flex-col items-center">
-        {!isMobile && (
-          <div className="w-48 mb-4 md:mb-0 md:mr-4">
-            {renderEditorContent()}
-          </div>
-        )}
-        <div
-          className="aspect-[3/4] rounded-lg overflow-hidden relative border-4 border-gray-300 ml-10"
-          style={{ width: '400px', height: '533px' }}
-          onClick={() => setActiveElement(null)}
-        >
-          <object
-            type="image/svg+xml"
-            data={getSvgPath(selectedPage)}
-            className="w-full h-full absolute top-0 left-0"
-          >
-            Your browser does not support SVG
-          </object>
-          <div className="absolute inset-0">
-            {staticElements.map((element) => (
-              <div
-                key={element.id}
-                style={{
-                  position: 'absolute',
-                  left: `${element.position.x}px`,
-                  top: `${element.position.y}px`,
-                  width: `${element.width}px`,
-                  height: `${element.height}px`,
-                }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActiveElement(element.id);
-                }}
-              >
-                {element.type === 'image' ? (
-                  element.content ? (
-                    <img src={element.content} alt="Uploaded" className="w-full h-full object-cover" />
-                  ) : (
-                    <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                      <Image size={24} />
-                    </div>
-                  )
-                ) : (
-                  <div
-                    contentEditable
-                    suppressContentEditableWarning
-                    className="w-full h-full p-2"
-                    style={{
-                      fontFamily: element.font || 'Lust Script, Arial, sans-serif',
-                      fontSize: `${element.size || 18}px`,
-                      color: element.color || '#04D9B2',
-                      textAlign: element.align || 'left',
-                    }}
-                    onBlur={(e) => {
-                      updateElement(element.id, { content: e.currentTarget.textContent || '' });
-                    }}
-                  >
-                    {element.content || element.placeholder}
-                  </div>
-                )}
-                {activeElement === element.id && (
-                  <div className="absolute inset-0 ring-2 ring-blue-500" />
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default Canvas;
-*/}
