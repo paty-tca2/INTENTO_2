@@ -2,6 +2,7 @@ export type CardTemplate = {
   id: string;
   imageUrl: string;
   categoria:string [];
+  
   pages: {
     pageNumber: number;
     staticPlaceholders: {

@@ -8,6 +8,10 @@ import Modal from './modal';
 import { VscTextSize } from 'react-icons/vsc';
 import { SwatchesPicker } from 'react-color';
 import { Resizable } from 're-resizable';
+import Alerta from '@/components/alerts';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css'; // Estilos opcionales
+
 //lienzo interactivo que permite a los usuarios personalizar plantillas de tarjetas, editando texto e imágenes sobre un lienzo (canvas) predefinido
 
 //fuentes que proporciona el sistema 
@@ -52,7 +56,8 @@ const PageAlert = () => {
   useEffect(() => {
     // Mostrar la alerta cuando la página se cargue
     setShowAlert(true);
-  }, [])}; // Se ejecuta solo una vez al cargar la página
+  }, [])
+}; // Se ejecuta solo una vez al cargar la página
 
 const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange }) => {
   const [staticElements, setStaticElements] = useState<CanvasElement[]>([]);
@@ -150,6 +155,7 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
               <span className="text-xs mt-1">Añadir Imagen</span>
             </button>
              */}
+             
           <button
             className="w-16 h-16 p-2 bg-gray-50 text-black font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
             onClick={triggerFileInput}
@@ -170,83 +176,25 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
           <br />
 
 
-
-          <button
-            className="w-16 h-16 p-2 bg-gray-50 text-black font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
-            onClick={() => setSizeModalOpen(true)}
-          >
-            <VscTextSize size={20} />
-            <span className="text-xs mt-1">Tamaño</span>
-          </button>
-          <br />
-
-          <button
-            className="w-16 h-16 p-2 bg-gray-50 text-black font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
-            onClick={addTextElement
-            }
-          >
-            <Type size={20} />
-            <span className="text-xs mt-1">Añadir Texto</span>
-          </button>
-
-          <br />
-          {/*
-            <button
-              className="w-16 h-16 p-2 bg-gray-50 text-black font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
-              onClick={() => {
-                const currentAlign = staticElements.find(el => el.id === activeElement)?.align || 'left';
-                const nextAlign = currentAlign === 'left' ? 'center' : currentAlign === 'center' ? 'right' : 'left';
-                updateElement(activeElement, { align: nextAlign });
-              }}
-            >
-              <AlignCenter size={20} />
-              <span className="text-xs mt-1">Alinear</span>
-            </button> */}
         </div>
-        {/**/}
-
         {activeElement && staticElements.find(el => el.id === activeElement)?.type === 'image' && (
           <div>
-          <label className="w-24 h-24 p-2 bg-[#5D60a6] hover:bg-[#04D9b2] text-white font-geometos rounded-full flex flex-col items-center justify-center cursor-pointer">
-            <input 
-              type="file" 
-              accept="image/*" 
-              className="hidden" 
-              onChange={handleImageUpload} 
-            />
-            <Image size={20} />
-            <span className="text-xs mt-1">Subir Imagen</span>
-          </label>
-        
-          <div className="canvas">
-            {staticElements.map((el) =>
-              el.type === 'image' ? (
-                <div
-                  key={el.id}
-                  className="draggable"
-                  style={{
-                    position: 'absolute',
-                    top: el.position.y,
-                    left: el.position.x,
-                    width: el.width,
-                    height: el.height,
-                    backgroundImage: `url(${el.content})`,
-                    backgroundSize: 'cover',
-                    cursor: 'move',
-                  }}
-                  draggable
-                  onDragStart={(e) => handleDragStart(e, el.id)}
-                  onDrag={(e) => handleDrag(e, el.id)}
-                />
-              ) : null
-            )}
+            <label className="w-16 h-16 p-2 bg-gray-50 text-black font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200">
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleImageUpload}
+              />
+              <Image size={20} />
+              <span className="text-xs mt-1">Subir Imagen</span>
+            </label>
           </div>
-        </div>
-        
-          
+
+
         )}
       </div>
-      
+
     </div>
   );
 
@@ -277,7 +225,7 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
       id: `image-${Date.now()}`,
       type: 'image',
       content: imageSrc,
-      position: { x:0, y: 0 }, // Posición inicial
+      position: { x: 0, y: 0 }, // Posición inicial
       width: 100,
       height: 100,
       isStatic: false,
@@ -304,24 +252,6 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
     }
   };
 
-  const handleDragStart = (e: React.DragEvent, id: string) => {
-    e.dataTransfer.setData('elementId', id);
-  };
-  
-  const handleDrag = (e: React.DragEvent, id: string) => {
-    const updatedElements = staticElements.map((el) =>
-      el.id === id
-        ? { ...el, position: { x: e.clientX, y: e.clientY } }
-        : el
-    );
-    setStaticElements(updatedElements);
-  };
-
-
-
-
-
-
   /*----------------------
   const addImageElement = () => {
     const newImageElement: CanvasElement = {
@@ -337,7 +267,9 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
     setStaticElements([...staticElements, newImageElement]);
   };
 */
+
   const renderElements = () => {
+    
     return staticElements.map((element) => {
       if (element.type === 'text') {
         return (
@@ -379,31 +311,14 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
   const getSvgPath = (pageNum: number) => {
     return `/templates/template-${template.id}/${pageNum}.svg`;
   };
-
-  const renderPageNavigation = () => (
-    <div className="flex justify-center items-center space-x-4 mb-4">
-
-      <button
-        className="bg-gray-200 p-2 rounded-full"
-        onClick={() => onPageChange(selectedPage > 1 ? selectedPage - 1 : 4)}
-      >
-        <ChevronLeft size={20} />
-      </button>
-      <span className="font-bold">{selectedPage} / 4</span>
-      <button
-        className="bg-gray-200 p-2 rounded-full"
-        onClick={() => onPageChange(selectedPage < 4 ? selectedPage + 1 : 1)}
-      >
-        <ChevronRight size={20} />
-      </button>
-    </div>
-  );
+  
 
   //menu de navegacion de la parte inferior de la pagina de editar de plantillas
   const renderPageThumbnails = () => (
     <nav className=' fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4 bg-slate-700'>
       <div className="flex justify-center space-x-4 overflow-x-auto">
         {[1, 2, 3, 4].map((pageNum) => (
+
           <button
             key={pageNum}
             onClick={() => onPageChange(pageNum)}
@@ -415,9 +330,7 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
               alt={`Page ${pageNum}`}
               className="w-full h-full object-cover"
             />
-            <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-xs py-1">
-              {pageNum}
-            </div>
+
           </button>
         ))}
       </div>
@@ -427,6 +340,7 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
 
   return (
     <div className=" flex w-full flex items-center grid gap-2">
+      
       {/* Main content */}
       <div className="flex flex-col items-center">
         {/* Page navigation for desktop */}
@@ -445,7 +359,7 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
             {/* Canvas */}
             <div
               //marco del editor de plantilla
-              className="aspect-[3/4] rounded-lg overflow-hidden relative border-4 ml-10"
+              className="aspect-[3/4] bg-blue rounded-lg overflow-hidden relative border-4 ml-10"
               style={{ width: '400px', height: '533px' }}
               onClick={() => setActiveElement(null)}
             >
@@ -457,13 +371,14 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
                 Your browser does not support SVG
               </object>
               {/*Contenedor donde esta la imagen de la tarjeta */}
-              <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute inset-0  overflow-hidden">
                 <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${controlArray * 100}%)` }}>
-
                   {staticElements.map((element) => (//arreglo de las imagenes 
                     <div
-                      key={element.id}//se genera un conetendo para cada imagen 
+                      key={element.id+1
+                      }//se genera un conetendo para cada imagen 
                       className='w-full flex-shrink-0'
+                      
                       style={{
                         position: 'relative',// la imagen se posiciona dentro del contenedor 
                         left: `${element.position.x}px`,
@@ -473,7 +388,7 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
                       }}
                       onClick={(e) => {
                         e.stopPropagation();
-                        setActiveElement(element.id);
+                        setActiveElement(element.id+1);
                       }}
                     >
                       {element.type === 'image' ? (
@@ -496,13 +411,13 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
                             textAlign: element.align || 'left',
                           }}
                           onBlur={(e) => {//Cuando el usuario deja de editar (evento onBlur), se actualiza el contenido del elemento con el nuevo texto que el usuario ha escrito (updateElement(element.id, { content: e.currentTarget.textContent || '' })).
-                            updateElement(element.id, { content: e.currentTarget.textContent || '' });
+                            updateElement(element.id+1, { content: e.currentTarget.textContent || '' });
                           }}
                         >
                           {element.content || element.placeholder}
                         </div>
                       )}
-                      {activeElement === element.id && (
+                      {activeElement === element.id +1&& (
                         <div className="absolute inset-0 ring-2 ring-blue-500" />
                       )}
                     </div>
@@ -510,9 +425,9 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
                 </div>
               </div>
             </div>
-
             {/* Page thumbnails */}
             {!isMobile && renderPageThumbnails()}
+            
           </div>
         </div>
 
@@ -541,26 +456,7 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
           </div>
         </Modal>
 
-        {/* Size Modal */}
-        <Modal isOpen={sizeModalOpen} onClose={() => setSizeModalOpen(false)} title="Seleccionar Tamaño de Fuente">
-          <div className="grid grid-cols-3 gap-2">
-            {fontSizes.map((size) => (
-              <button
-                key={size}
-                className="p-2 bg-[#5D60a6] hover:bg-[#04D9B2] rounded text-sm"
-                onClick={() => {
-                  if (activeElement) {
-                    updateElement(activeElement, { size });
-                  }
-                  setSizeModalOpen(false);
-                }}
-              >
-                {size}px
-              </button>
-            ))}
-          </div>
-        </Modal>
-        {/* Color Modal */}
+
         <Modal isOpen={colorModalOpen} onClose={() => setColorModalOpen(false)} title="Seleccionar Color">
           <div className='grid grid-cols-3 gap-2'>
             {colores.map((color) => (
@@ -577,16 +473,46 @@ const Canvas: React.FC<CanvasProps> = ({ template, selectedPage, onPageChange })
             ))}
 
           </div>
+          
         </Modal>
 
 
       </div>
-
+      
     </div>
   );
 };
 
 export default Canvas;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -608,6 +534,83 @@ export default Canvas;
 
 
 
+{/* Size Modal 
+        <Modal isOpen={sizeModalOpen} onClose={() => setSizeModalOpen(false)} title="Seleccionar Tamaño de Fuente">
+          <div className="grid grid-cols-3 gap-2">
+            {fontSizes.map((size) => (
+              <button
+                key={size}
+                className="p-2 bg-[#5D60a6] hover:bg-[#04D9B2] rounded text-sm"
+                onClick={() => {
+                  if (activeElement) {
+                    updateElement(activeElement, { size });
+                  }
+                  setSizeModalOpen(false);
+                }}
+              >
+                {size}px
+              </button>
+            ))}
+          </div>
+        </Modal>
+        {/* Color Modal */}
+//______________________________________________________________________________________
+/*
+  // Botones para mover de una plantilla a otra 
+  const renderPageNavigation = () => (
+    <div className="flex justify-center items-center space-x-4 mb-4">
+
+      <button
+        className="bg-gray-200 p-2 rounded-full"
+        onClick={() => onPageChange(selectedPage > 1 ? selectedPage - 1 : 4)}
+      >
+        <ChevronLeft size={20} />
+      </button>
+      <span className="font-bold">{selectedPage} / 4</span>
+      <button
+        className="bg-gray-200 p-2 rounded-full"
+        onClick={() => onPageChange(selectedPage < 4 ? selectedPage + 1 : 1)}
+      >
+        <ChevronRight size={20} />
+      </button>
+    </div>
+  );
+*/
+
+//-------------------------------------------------------------------------------------------
+          {/*
+
+          <button
+            className="w-16 h-16 p-2 bg-gray-50 text-black font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
+            onClick={() => setSizeModalOpen(true)}
+          >
+            <VscTextSize size={20} />
+            <span className="text-xs mt-1">Tamaño</span>
+          </button>
+          <br />
+          
+          <button
+            className="w-16 h-16 p-2 bg-gray-50 text-black font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
+            onClick={addTextElement
+            }
+          >
+            <Type size={20} />
+            <span className="text-xs mt-1">Añadir Texto</span>
+          </button>
+
+          <br />
+          {
+            <button
+              className="w-16 h-16 p-2 bg-gray-50 text-black font-geometos rounded-md flex flex-col items-center justify-center transition-colors duration-200"
+              onClick={() => {
+                const currentAlign = staticElements.find(el => el.id === activeElement)?.align || 'left';
+                const nextAlign = currentAlign === 'left' ? 'center' : currentAlign === 'center' ? 'right' : 'left';
+                updateElement(activeElement, { align: nextAlign });
+              }}
+            >
+              <AlignCenter size={20} />
+              <span className="text-xs mt-1">Alinear</span>
+            </button> */}
 
 
 
